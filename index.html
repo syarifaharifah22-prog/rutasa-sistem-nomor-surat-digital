@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Nomor Surat - Rutan Kelas IIB Sabang</title>
+
+    <!-- LIB -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- FONT -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="w-full">
+
+    <!-- Navigation -->
+    <nav class="w-full fixed top-0 z-50"
+        style="background: linear-gradient(135deg, #0f2557 0%, #1e3a6f 100%); box-shadow: 0 4px 20px rgba(15, 37, 87, 0.3);">
+        <div class="max-w-7xl mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <img src="https://share.google/images/JhP0ixY4bXMgpJ91u" alt="Logo Rutan Sabang" width="60"
+                        height="60" style="object-fit: contain;"
+                        onerror="this.style.display='none'; this.alt='Logo gagal dimuat';">
+                    <div>
+                        <h1 class="text-lg font-bold leading-tight" style="color: #ffffff;">RUMAH TAHANAN NEGARA KELAS
+                            IIB SABANG</h1>
+                        <p class="text-xs leading-tight" style="color: #d4af37;">DIREKTORAT JENDERAL PEMASYARAKATAN</p>
+                        <p class="text-xs leading-tight" style="color: #c0c9d8;">Sistem Penomoran Surat Digital</p>
+                    </div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="showSection('home')" class="px-6 py-3 rounded-lg font-semibold transition-all"
+                        style="color: #ffffff; background: rgba(255,255,255,0.1);" id="nav-home"> 🏠 Beranda </button>
+                    <button onclick="showSection('history')" class="px-6 py-3 rounded-lg font-semibold transition-all"
+                        style="color: #ffffff; background: rgba(255,255,255,0.1);" id="nav-history"> 📊 Data </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home-section" class="w-full hero-bg" style="margin-top: 80px; padding: 80px 0;">
+        <div class="hero-pattern"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <h1 class="font-playfair text-5xl md:text-6xl font-bold mb-4" style="color: #ffffff;"
+                        id="hero-title">RUMAH TAHANAN NEGARA<br> KELAS IIB SABANG</h1>
+                    <p class="text-xl mb-8" style="color: #c0c9d8;" id="hero-subtitle">Sistem Penomoran Surat Digital
+                        yang Modern dan Efisien</p>
+                    <button onclick="showSection('form')"
+                        class="btn-primary text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl"> Ambil Nomor
+                        Surat → </button>
+                </div>
+                <div class="slide-in">
+                    <!-- SVG (keaslian dipersiapkan) -->
+                    <svg class="w-full h-auto" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                        <!-- simplified decorative svg to keep UI identical visually -->
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#f4e5b0;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#d4af37;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#c19a2e;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="blueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#1e3a6f;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0f2557;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="110" y="60" width="280" height="360" rx="20" fill="url(#blueGrad)" />
+                        <circle cx="250" cy="320" r="36" fill="url(#goldGrad)" />
+                        <text x="250" y="332" font-family="Arial" font-weight="700" font-size="30" text-anchor="middle"
+                            fill="#0f2557"></text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Guide (codes 1-2 snippets integrated) -->
+    <section class="w-full py-20 px-6" style="background: #f9fafb;">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card rounded-xl p-8 fade-in">
+                    <div class="w-16 h-16 gold-accent rounded-full flex items-center justify-center mb-6 text-3xl"
+                        style="color: #0f2557;">📚</div>
+                    <h3 class="font-playfair text-2xl font-bold mb-4" style="color: #0f2557;" id="about-title">Tentang
+                        Rutan Sabang</h3>
+                    <p class="mb-4" style="color: #4b5563;" id="about-content">Rumah Tahanan Negara Kelas IIB Sabang
+                        berdiri sejak tahun 1985, berkomitmen memberikan pelayanan terbaik dalam sistem pemasyarakatan
+                        Indonesia. Dengan visi menjadi institusi pemasyarakatan yang modern, profesional, dan
+                        berintegritas.</p>
+                    <p class="font-semibold" style="color: #d4af37;">Visi: Terwujudnya Sistem Pemasyarakatan yang
+                        Profesional</p>
+                    <p class="mt-2 text-sm" style="color: #6b7280;">Misi: Melaksanakan pembinaan tahanan secara optimal
+                        dengan mengedepankan HAM dan nilai-nilai kemanusiaan.</p>
+                </div>
+                <div class="glass-card rounded-xl p-8 fade-in" style="animation-delay: 0.2s;">
+                    <div class="w-16 h-16 gold-accent rounded-full flex items-center justify-center mb-6 text-3xl"
+                        style="color: #0f2557;">👤</div>
+                    <h3 class="font-playfair text-2xl font-bold mb-4" style="color: #0f2557;" id="welcome-title">
+                        Sambutan Kepala Rutan</h3>
+                    <p style="color: #4b5563;" id="welcome-content">Selamat datang di sistem penomoran surat digital
+                        Rutan Kelas IIB Sabang. Kami berkomitmen meningkatkan efisiensi administrasi dengan teknologi
+                        modern untuk pelayanan yang lebih baik dan transparan kepada seluruh stakeholder.</p>
+                    <p class="mt-4 font-semibold" style="color: #0f2557;">- Kepala Rutan Kelas IIB Sabang</p>
+                </div>
+                <div class="glass-card rounded-xl p-8 fade-in" style="animation-delay: 0.4s;">
+                    <div class="w-16 h-16 gold-accent rounded-full flex items-center justify-center mb-6 text-3xl"
+                        style="color: #0f2557;">💻</div>
+                    <h3 class="font-playfair text-2xl font-bold mb-4" style="color: #0f2557;" id="app-desc-title">Fungsi
+                        Aplikasi</h3>
+                    <ul class="space-y-3" style="color: #4b5563;">
+                        <li class="flex items-start"><span class="mr-2" style="color: #d4af37;">✓</span> <span>Generate
+                                nomor surat otomatis dengan format terstruktur</span></li>
+                        <li class="flex items-start"><span class="mr-2" style="color: #d4af37;">✓</span>
+                            <span>Penyimpanan data surat digital yang aman (localStorage sementara)</span></li>
+                        <li class="flex items-start"><span class="mr-2" style="color: #d4af37;">✓</span> <span>Export
+                                data ke PDF dan Excel untuk arsip</span></li>
+                        <li class="flex items-start"><span class="mr-2" style="color: #d4af37;">✓</span> <span>Riwayat
+                                lengkap semua surat yang dibuat</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panduan & Form (codes 2) -->
+    <section class="w-full py-20 px-6" style="background: #ffffff;">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="font-playfair text-4xl font-bold text-center mb-12" style="color: #0f2557;">Panduan Penggunaan
+            </h2>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 gold-accent rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-bold"
+                        style="color: #0f2557;">1</div>
+                    <h4 class="font-semibold mb-2" style="color: #0f2557;">Klik Tombol</h4>
+                    <p class="text-sm" style="color: #6b7280;">Klik "Ambil Nomor Surat" di menu atau hero section</p>
+                </div>
+                <div class="text-center fade-in" style="animation-delay: 0.2s;">
+                    <div class="w-20 h-20 gold-accent rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-bold"
+                        style="color: #0f2557;">2</div>
+                    <h4 class="font-semibold mb-2" style="color: #0f2557;">Isi Formulir</h4>
+                    <p class="text-sm" style="color: #6b7280;">Lengkapi semua field dengan data surat yang akurat</p>
+                </div>
+                <div class="text-center fade-in" style="animation-delay: 0.4s;">
+                    <div class="w-20 h-20 gold-accent rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-bold"
+                        style="color: #0f2557;">3</div>
+                    <h4 class="font-semibold mb-2" style="color: #0f2557;">Submit</h4>
+                    <p class="text-sm" style="color: #6b7280;">Klik "Selesai Mengetik" untuk generate nomor surat</p>
+                </div>
+                <div class="text-center fade-in" style="animation-delay: 0.6s;">
+                    <div class="w-20 h-20 gold-accent rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-bold"
+                        style="color: #0f2557;">4</div>
+                    <h4 class="font-semibold mb-2" style="color: #0f2557;">Kelola Data</h4>
+                    <p class="text-sm" style="color: #6b7280;">Lihat riwayat, export PDF/Excel, atau hapus data</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section (kode 2) -->
+    <section id="form-section" class="w-full py-20 px-6 hidden"
+        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); margin-top: 80px;">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-card rounded-xl p-10"
+                style="background: rgba(255, 255, 255, 0.98); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);">
+                <div class="text-center mb-8">
+                    <div class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center text-4xl"
+                        style="background: linear-gradient(135deg, #d4af37 0%, #f4e5b0 100%);">✍️</div>
+                    <h2 class="font-playfair text-4xl font-bold mb-2" style="color: #0f2557;">Buat Nomor Surat Baru</h2>
+                    <p style="color: #6b7280;">Lengkapi formulir di bawah untuk mendapatkan nomor surat otomatis</p>
+                </div>
+
+                <form id="letter-form" class="space-y-6">
+                    <div><label class="form-label block font-semibold mb-2 text-base">Perihal Surat</label>
+                        <input type="text" id="perihal" required class="form-input w-full px-4 py-3 rounded-lg"
+                            placeholder="Contoh: Permohonan Izin Kunjungan">
+                    </div>
+
+                    <div><label class="form-label block font-semibold mb-2 text-base">Kode Surat</label>
+                        <input type="text" id="kode-surat" required class="form-input w-full px-4 py-3 rounded-lg"
+                            placeholder="Contoh: B/123">
+                        <p class="text-xs mt-1" style="color:#6b7280;">(Field ini tersimpan sebagai referensi — format
+                            utama: <code>NNN/RUTAN-SBG/PK/MM/YYYY</code>)</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div><label class="form-label block font-semibold mb-2 text-base">Tanggal Surat</label>
+                            <input type="date" id="tanggal-surat" required
+                                class="form-input w-full px-4 py-3 rounded-lg">
+                        </div>
+                        <div><label class="form-label block font-semibold mb-2 text-base">Tujuan Surat</label>
+                            <input type="text" id="tujuan-surat" required class="form-input w-full px-4 py-3 rounded-lg"
+                                placeholder="Contoh: Kepala Kanwil">
+                        </div>
+                    </div>
+
+                    <div><label class="form-label block font-semibold mb-2 text-base">Keterangan</label>
+                        <textarea id="keterangan" rows="4" class="form-input w-full px-4 py-3 rounded-lg"
+                            placeholder="Keterangan tambahan (opsional)"></textarea>
+                    </div>
+
+                    <div class="flex space-x-4">
+                        <button type="submit" id="submit-btn"
+                            class="text-white px-8 py-4 rounded-lg font-semibold text-lg flex-1 shadow-lg"
+                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <span id="submit-text">✓ Selesai Mengetik</span>
+                            <div id="submit-spinner" class="spinner mx-auto hidden"></div>
+                        </button>
+                        <button type="button" onclick="showSection('home')"
+                            class="px-8 py-4 rounded-lg font-semibold text-lg border-2 transition-all hover:shadow-lg"
+                            style="border-color: #667eea; color: #667eea; background: white;"> ← Batal </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section (kode 3) -->
+    <section id="history-section" class="w-full py-20 px-6 hidden" style="background: #f9fafb; margin-top: 80px;">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="font-playfair text-4xl font-bold" style="color: #0f2557;">Data Surat</h2>
+                <div class="flex space-x-3">
+                    <button id="export-pdf-btn"
+                        class="btn-primary text-white px-6 py-3 rounded-lg font-semibold flex items-center"> 📄 Export
+                        PDF </button>
+                    <button id="export-excel-btn"
+                        class="btn-primary text-white px-6 py-3 rounded-lg font-semibold flex items-center"> 📊 Export
+                        Excel </button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="rounded-xl p-6 shadow-xl relative overflow-hidden"
+                    style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <p class="text-sm font-semibold mb-2" style="color: rgba(255,255,255,0.9);">Total Surat</p>
+                    <p class="text-4xl font-bold" style="color: #ffffff;" id="total-surat">0</p>
+                </div>
+                <div class="rounded-xl p-6 shadow-xl relative overflow-hidden"
+                    style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <p class="text-sm font-semibold mb-2" style="color: rgba(255,255,255,0.9);">Hari Ini</p>
+                    <p class="text-4xl font-bold" style="color: #ffffff;" id="surat-hari-ini">0</p>
+                </div>
+                <div class="rounded-xl p-6 shadow-xl relative overflow-hidden"
+                    style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <p class="text-sm font-semibold mb-2" style="color: rgba(255,255,255,0.9);">Bulan Ini</p>
+                    <p class="text-4xl font-bold" style="color: #ffffff;" id="surat-bulan-ini">0</p>
+                </div>
+                <div class="rounded-xl p-6 shadow-xl relative overflow-hidden"
+                    style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                    <p class="text-sm font-semibold mb-2" style="color: rgba(255,255,255,0.9);">Nomor Terakhir</p>
+                    <p class="text-xl font-bold" style="color: #ffffff;" id="nomor-terakhir">-</p>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full" id="surat-table">
+                        <thead style="background: linear-gradient(135deg, #0f2557 0%, #1e3a6f 100%);">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-sm font-bold" style="color: #ffffff;">No</th>
+                                <th class="px-6 py-4 text-left text-sm font-bold" style="color: #ffffff;">Nomor Surat
+                                </th>
+                                <th class="px-6 py-4 text-left text-sm font-bold" style="color: #ffffff;">Perihal</th>
+                                <th class="px-6 py-4 text-left text-sm font-bold" style="color: #ffffff;">Kode Surat
+                                </th>
+                                <th class="px-6 py-4 text-left text-sm font-bold" style="color: #ffffff;">Tanggal</th>
+                                <th class="px-6 py-4 text-left text-sm font-bold" style="color: #ffffff;">Tujuan</th>
+                                <th class="px-6 py-4 text-center text-sm font-bold" style="color: #ffffff;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body"><!-- Table rows inserted here --></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="empty-state" class="text-center py-20 hidden">
+                <div class="w-32 h-32 gold-accent rounded-full flex items-center justify-center mx-auto mb-6 text-6xl"
+                    style="color: #0f2557;">📭</div>
+                <p class="text-xl font-semibold mb-2" style="color: #0f2557;">Belum Ada Surat</p>
+                <p style="color: #6b7280;">Mulai buat surat pertama Anda dengan klik tombol "Ambil Nomor Surat"</p>
+            </div>
+        </div>
+    </section>
+    <div id="notification-container"></div>
+
+    <!-- JS -->
+    <script src="app.js"></script>
+</body>
+
+</html>
