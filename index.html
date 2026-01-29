@@ -30,23 +30,22 @@
         <div class="max-w-7xl mx-auto px-6 py-3">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
-                    <img src="https://share.google/images/JhP0ixY4bXMgpJ91u" alt="Logo Rutan Sabang" width="60"
-                        height="60" style="object-fit: contain;"
-                        onerror="this.style.display='none'; this.alt='Logo gagal dimuat';">
-                    <div>
-                        <h1 class="text-lg font-bold leading-tight" style="color: #ffffff;">RUMAH TAHANAN NEGARA KELAS
-                            IIB SABANG</h1>
-                        <p class="text-xs leading-tight" style="color: #d4af37;">DIREKTORAT JENDERAL PEMASYARAKATAN</p>
-                        <p class="text-xs leading-tight" style="color: #c0c9d8;">Sistem Penomoran Surat Digital</p>
-                    </div>
-                </div>
-                <div class="flex space-x-2">
-                    <button onclick="showSection('home')" class="px-6 py-3 rounded-lg font-semibold transition-all"
-                        style="color: #ffffff; background: rgba(255,255,255,0.1);" id="nav-home"> 🏠 Beranda </button>
-                    <button onclick="showSection('history')" class="px-6 py-3 rounded-lg font-semibold transition-all"
-                        style="color: #ffffff; background: rgba(255,255,255,0.1);" id="nav-history"> 📊 Data </button>
+                    <img src="https://raw.githubusercontent.com/syarifaharifah22-prog/rutasa-sistem-nomor-surat-digital/main/assets/logo.png"
+                        alt="Logo Rutan Sabang" width="60" height="60" style="object-fit: contain;"
+                        onerror="this.src='assets/logo.png';" />
+                    <h1 class="text-lg font-bold leading-tight" style="color: #ffffff;">RUMAH TAHANAN NEGARA KELAS
+                        IIB SABANG</h1>
+                    <p class="text-xs leading-tight" style="color: #d4af37;">DIREKTORAT JENDERAL PEMASYARAKATAN</p>
+                    <p class="text-xs leading-tight" style="color: #c0c9d8;">Sistem Penomoran Surat Digital</p>
                 </div>
             </div>
+            <div class="flex space-x-2">
+                <button onclick="showSection('home')" class="px-6 py-3 rounded-lg font-semibold transition-all"
+                    style="color: #ffffff; background: rgba(255,255,255,0.1);" id="nav-home"> 🏠 Beranda </button>
+                <button onclick="showSection('history')" class="px-6 py-3 rounded-lg font-semibold transition-all"
+                    style="color: #ffffff; background: rgba(255,255,255,0.1);" id="nav-history"> 📊 Data </button>
+            </div>
+        </div>
         </div>
     </nav>
 
@@ -126,7 +125,8 @@
                         <li class="flex items-start"><span class="mr-2" style="color: #d4af37;">✓</span> <span>Generate
                                 nomor surat otomatis dengan format terstruktur</span></li>
                         <li class="flex items-start"><span class="mr-2" style="color: #d4af37;">✓</span>
-                            <span>Penyimpanan data surat digital yang aman (localStorage sementara)</span></li>
+                            <span>Penyimpanan data surat digital yang aman (localStorage sementara)</span>
+                        </li>
                         <li class="flex items-start"><span class="mr-2" style="color: #d4af37;">✓</span> <span>Export
                                 data ke PDF dan Excel untuk arsip</span></li>
                         <li class="flex items-start"><span class="mr-2" style="color: #d4af37;">✓</span> <span>Riwayat
