@@ -25,27 +25,46 @@
 <body class="w-full">
 
     <!-- Navigation -->
-    <nav class="w-full fixed top-0 z-50"
-        style="background: linear-gradient(135deg, #0f2557 0%, #1e3a6f 100%); box-shadow: 0 4px 20px rgba(15, 37, 87, 0.3);">
+    <nav class="w-full fixed top-0 z-50" style="background: linear-gradient(135deg, #0f2557 0%, #1e3a6f 100%);
+           box-shadow: 0 4px 20px rgba(15, 37, 87, 0.3);">
+
         <div class="max-w-7xl mx-auto px-6 py-3">
+            <!-- SATU FLEX UTAMA -->
             <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
+
+                <!-- KIRI: LOGO + TEKS -->
+                <div class="flex items-center gap-4">
                     <img src="https://raw.githubusercontent.com/syarifaharifah22-prog/rutasa-sistem-nomor-surat-digital/main/assets/logo.png"
-                        alt="Logo Rutan Sabang" width="60" height="60" style="object-fit: contain;"
-                        onerror="this.src='assets/logo.png';" />
-                    <h1 class="text-lg font-bold leading-tight" style="color: #ffffff;">RUMAH TAHANAN NEGARA KELAS
-                        IIB SABANG</h1>
-                    <p class="text-xs leading-tight" style="color: #d4af37;">DIREKTORAT JENDERAL PEMASYARAKATAN</p>
-                    <p class="text-xs leading-tight" style="color: #c0c9d8;">Sistem Penomoran Surat Digital</p>
+                        alt="Logo Rutan Sabang" class="w-[60px] h-[60px] object-contain shrink-0"
+                        onerror="this.src='assets/logo.png';">
+
+                    <div class="leading-tight">
+                        <h1 class="text-lg font-bold text-white">
+                            RUMAH TAHANAN NEGARA KELAS IIB SABANG
+                        </h1>
+                        <p class="text-xs text-[#d4af37]">
+                            DIREKTORAT JENDERAL PEMASYARAKATAN
+                        </p>
+                        <p class="text-xs text-[#c0c9d8]">
+                            Sistem Penomoran Surat Digital
+                        </p>
+                    </div>
                 </div>
+
+                <!-- KANAN: MENU -->
+                <div class="flex space-x-2">
+                    <button onclick="showSection('home')" class="px-6 py-3 rounded-lg font-semibold transition-all"
+                        style="color:#fff; background:rgba(255,255,255,0.1);" id="nav-home">
+                        🏠 Beranda
+                    </button>
+
+                    <button onclick="showSection('history')" class="px-6 py-3 rounded-lg font-semibold transition-all"
+                        style="color:#fff; background:rgba(255,255,255,0.1);" id="nav-history">
+                        📊 Data
+                    </button>
+                </div>
+
             </div>
-            <div class="flex space-x-2">
-                <button onclick="showSection('home')" class="px-6 py-3 rounded-lg font-semibold transition-all"
-                    style="color: #ffffff; background: rgba(255,255,255,0.1);" id="nav-home"> 🏠 Beranda </button>
-                <button onclick="showSection('history')" class="px-6 py-3 rounded-lg font-semibold transition-all"
-                    style="color: #ffffff; background: rgba(255,255,255,0.1);" id="nav-history"> 📊 Data </button>
-            </div>
-        </div>
         </div>
     </nav>
 
